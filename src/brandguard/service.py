@@ -34,6 +34,7 @@ from brandguard.assets import (
     AssetManager,
     AssetLibrary,
 )
+from brandguard.licensing import license_gate
 
 logger = logging.getLogger(__name__)
 
@@ -216,6 +217,7 @@ class BrandService:
         Returns:
             Validation result
         """
+        license_gate.gate("std.brandguard.advanced")
         if not self._identity:
             return {"error": "No brand identity created", "passed": False}
 
@@ -246,6 +248,7 @@ class BrandService:
         Returns:
             Consistency report
         """
+        license_gate.gate("std.brandguard.advanced")
         if not self._identity:
             return {"error": "No brand identity created"}
 
@@ -387,6 +390,7 @@ class BrandService:
         Returns comprehensive brand information for use
         by designers, marketers, and content creators.
         """
+        license_gate.gate("std.brandguard.advanced")
         if not self._identity:
             return {"error": "No brand identity created"}
 
@@ -424,6 +428,7 @@ class BrandService:
         Returns:
             Executive-specific brand report
         """
+        license_gate.gate("std.brandguard.enterprise")
         if not self._identity:
             return {"error": "No brand identity created"}
 
@@ -529,6 +534,7 @@ class BrandService:
         Designed to be called by the scheduler for periodic
         brand health checks.
         """
+        license_gate.gate("std.brandguard.enterprise")
         if not self._identity:
             return {"error": "No brand identity created"}
 
